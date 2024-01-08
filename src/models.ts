@@ -31,5 +31,12 @@ export interface ICommonReducer {
 
 export interface ICatalogWidgetReducer {
   selectedCategory: number,
-  offset: number,
+  page: number,
+  products: TProduct[],
+  canLazyLoad: boolean,
+}
+
+export type TReducerActionProps = {
+  type: string,
+  payload: any
 }

@@ -1,17 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../hooks/useFetch";
+
 import { IRootReducer } from "../../models";
-import { SET_SELECTED_CATEGORY } from "../../redux/actions";
+
+import switchLazyLoad from "../../redux/actions/switchLazyLoad";
+import setWidgetSelectedCategory from "../../redux/actions/setWidgetSelectedCategory";
 
 export const CategoryLinks = () => {
   const dispatch = useDispatch();  
   const selectedCategoryId = useSelector((state:IRootReducer) => state.catalogWidget.selectedCategory);
 
   const linkClickHandler = (evt:React.MouseEvent) => {
-    if ( evt.target instanceof HTMLElement ) {
+    if (evt.target instanceof HTMLElement) {
       evt.preventDefault();
 
-      dispatch({type: SET_SELECTED_CATEGORY, payload: evt.target.dataset.id || 0});
+      let id = 0;
+      if (evt.target.dataset.id) {
+        id = parseInt(evt.target.dataset.id);
+      }
+      dispatch(setWidgetSelectedCategory(id));
+      dispatch(switchLazyLoad(true));
     }
   }
 

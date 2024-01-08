@@ -15,3 +15,16 @@ export const formatMoney = (amount: number, decimalCount = 2, decimal = ".", tho
 
   return ( postfix.length ? `${formattedPrice} ${postfix}` : formattedPrice );
 };
+
+export const fetchData = async (url: string, opts?: object) => {
+  try {
+    const response = await fetch(url, opts);
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    return await response.json();    
+  } catch (e) {
+    return (e instanceof Error ? e.toString() : "Invalid request");
+  }
+}
