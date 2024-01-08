@@ -6,6 +6,27 @@ export type TProduct = {
   price: number,
 }
 
+export interface IProductDetail {
+  id: number,
+  title: string,
+  category: number,
+  images: string[],
+  price: number,
+  sizes: TProductSizes[],
+  sku: string,
+  season: string,
+  reason: string,
+  material: string,
+  manufacturer: string,
+  color: string,
+  heelSize: string
+}
+
+export type TProductSizes = {
+  size: string,
+  available: boolean
+}
+
 export type TProductProps = {
   data: TProduct,
   className?: string,
