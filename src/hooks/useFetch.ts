@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 
-type UseJsonFetchResult = {
-  data: object,
+export function useFetch<T>(url:string, opts?: object): {
+  data: T | Object,
   isLoading: boolean,
   isSuccess: boolean,
   error: string
-}
-
-export const useFetch = (url:string, opts?: object): UseJsonFetchResult => {
-  const [data, setData] = useState<Object>({});
+} {
+  const [data, setData] = useState<T | Object>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
