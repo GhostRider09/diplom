@@ -1,13 +1,14 @@
 import { useFetch } from "../../hooks/useFetch";
+
+import { TProduct } from "../../models";
+
 import { ErrorText } from "../Errors/ErrorText";
 import { Preloader } from "../Preloader";
 import { Card } from "../Product/Card";
 
 export const TopSales = () => {
   const url = `${import.meta.env.VITE_API_URL}/top-sales`;
-  const {data: items, isLoading, isSuccess, error} = useFetch(url);
-
-  
+  const {data: items, isLoading, isSuccess, error} = useFetch<TProduct[]>(url);
 
   const renderComponent = () => {
     const isHideComponent = ( isSuccess && Array.isArray(items) && items.length <= 0 );

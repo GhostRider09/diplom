@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 export function useFetch<T>(url:string, opts?: object): {
-  data: T | Object,
+  data: T|null,
   isLoading: boolean,
   isSuccess: boolean,
   error: string
 } {
-  const [data, setData] = useState<T | Object>({});
+  const [data, setData] = useState<T|null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
