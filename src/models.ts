@@ -56,7 +56,7 @@ export interface IRootReducer {
 }
 
 export interface ICommonReducer {
-  categories: ICategory[]
+  cartCounter: number
 }
 
 export interface ICatalogWidgetReducer {

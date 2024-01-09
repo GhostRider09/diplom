@@ -19,7 +19,7 @@ export const CartRow = ({item, idx, removeItemHandler}: {
   return (
     <tr>
       <td scope="row">{idx}</td>
-      <td><Link to={detailPageUrl}>Босоножки 'MYER'</Link></td>
+      <td><Link to={detailPageUrl}>{item.title}</Link></td>
       <td>{item.size}</td>
       <td>{item.amount}</td>
       <td>{formatMoney(item.price)}</td>

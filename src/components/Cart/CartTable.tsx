@@ -1,15 +1,21 @@
 import { formatMoney, moneyRound, setStoreValue } from "../../assets/tools";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-import { TCartTableProps } from "./types";
+import { ICartPosition } from "../../models";
+
+import updateCartCounter from "../../redux/actions/updateCartCounter";
 
 import { CartRow } from "./CartRow";
 
-export const CartTable = ({positions, updateState}:TCartTableProps) => {
+export const CartTable = ({positions}:{positions: ICartPosition[]}) => {
+  const dispatch = useDispatch();
+  
   const removeHandler = (uid: string) => {
     if ( uid !== "" && positions.length > 0 ) {
       const filteredItems = positions.filter(item => item.uid !== uid);
       setStoreValue('cart', filteredItems);
-      updateState(new Date().getTime());
+      dispatch(updateCartCounter(filteredItems.length));
     }
   }
   
@@ -19,6 +25,10 @@ export const CartTable = ({positions, updateState}:TCartTableProps) => {
       return sum += moneyRound(item.amount * item.price);
     }, 0);
   }
+
+  useEffect(() => {
+    dispatch(updateCartCounter(positions.length));
+  }, [])
 
   return (
     <table className="table table-bordered">
