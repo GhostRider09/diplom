@@ -28,3 +28,15 @@ export const fetchData = async (url: string, opts?: object) => {
     return (e instanceof Error ? e.toString() : "Invalid request");
   }
 }
+
+export const setStoreValue = (key: string, value: any) => {
+  localStorage[key] = JSON.stringify(value);
+}
+
+export const getStoreValue = (key: string) => {
+  return localStorage[key] && JSON.parse(localStorage[key]);
+}
+
+export const moneyRound = (value: number) => {
+  return (Math.round(value * 100) / 100);
+}
