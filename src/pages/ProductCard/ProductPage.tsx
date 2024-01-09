@@ -26,7 +26,7 @@ export const ProductPage = () => {
         && <section className="top-sales">
           <ErrorText text={"Ошибка загрузки данных!"} />
         </section>}
-      {isSuccess && <ProductDetail data={product} />}
+      {isSuccess && product && <ProductDetail data={product} />}
     </>
   )
 }

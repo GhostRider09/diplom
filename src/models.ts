@@ -22,6 +22,15 @@ export interface IProductDetail {
   heelSize: string
 }
 
+export interface ICartPosition {
+  uid: string,
+  id: number,
+  title: string,
+  size: string,
+  amount: number,
+  price: number 
+}
+
 export type TProductSizes = {
   size: string,
   available: boolean

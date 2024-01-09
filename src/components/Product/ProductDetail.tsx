@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { IProductDetail } from "../../models"
+import { useNavigate } from "react-router-dom";
+import { getStoreValue, setStoreValue } from "../../assets/tools";
+
+import { ICartPosition, IProductDetail } from "../../models"
+
 import { Sizes } from "./Sizes";
 import { Counter } from "./Counter";
 
@@ -8,7 +12,7 @@ export const ProductDetail = ({data}: {
 }) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [amount, setAmount] = useState<number>(1);
-
+  const navigate = useNavigate();
   const {
     id,
     title,
@@ -20,6 +24,7 @@ export const ProductDetail = ({data}: {
     material,
     manufacturer,
     color,
+    price,
   } = data;
 
   let isOutStock = true;
@@ -31,8 +36,28 @@ export const ProductDetail = ({data}: {
     });
   }
 
-  const appendToCart = () => {
+  const cartPositions:ICartPosition[] = getStoreValue('cart') || [];
+  const issetPositionIntoCart = selectedSize && cartPositions.filter(item => { 
+    const uid = (id.toString() + selectedSize);
+    return item.uid === uid;
+  });
 
+  const appendToCart = () => {
+    if ( issetPositionIntoCart.length <= 0 ) {
+      const position: ICartPosition = {
+        uid: id.toString() + selectedSize,
+        id: id,
+        title: title,
+        size: selectedSize,
+        amount: amount,
+        price: price,
+      }
+
+      let cart = ( getStoreValue('cart') || [] );
+      setStoreValue("cart", [...cart, position]);
+    }
+
+    navigate("/cart");
   }
 
   return (
@@ -87,7 +112,8 @@ export const ProductDetail = ({data}: {
             <button 
               className="btn btn-danger btn-block btn-lg"
               disabled={selectedSize === ""}
-              onClick={appendToCart}>В корзину</button>
+              onClick={appendToCart} 
+            >{issetPositionIntoCart.length > 0 ? "Перейти в корзину" : "Добавить в корзину"}</button>
           </>}
         </div>
       </div>
