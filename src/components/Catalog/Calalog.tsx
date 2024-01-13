@@ -10,7 +10,7 @@ export const Catalog = ({hideFilter}: TCatalogProps) => {
       <h2 className="text-center">Каталог</h2>
       {hideFilter !== true && <CatalogFilter />}
       <CategoryLinks />
-      <CatalogItems />
+      <CatalogItems queryDisable={hideFilter || false} />
     </section>
   )
 }

@@ -1,8 +1,29 @@
-import { Link } from "react-router-dom"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+
+import setQueryValue from "../redux/actions/setQueryValue"
+
+import { Link, useNavigate } from "react-router-dom"
 import { MainMenu } from "../components/Menu/MainMenu"
 import { CartWidget } from "../components/Cart/CartWidget"
+import { SearchWidgetForm } from "../components/SearchWidgetForm"
+import { SearchWidgetButton } from "../components/SearchWidgetButton"
 
 export const Header = () => {
+  const [ searchVisibility, setSearchVisibility ] = useState(false);
+  const [ searchInputValue, setSearchInputValue ] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const searchClickHandler = () => {
+    if ( searchVisibility && searchInputValue && searchInputValue.length ) { 
+      dispatch(setQueryValue(searchInputValue));
+      setSearchInputValue("");
+      navigate( "/catalog" );
+    }
+    setSearchVisibility( !searchVisibility );
+  }
+
   return (
     <header className="container">
       <div className="row">
@@ -15,12 +36,13 @@ export const Header = () => {
               <MainMenu />
               <div>
                 <div className="header-controls-pics">
-                  <div data-id="search-expander" className="header-controls-pic header-controls-search"></div>
+                  <SearchWidgetButton clickHandler={searchClickHandler} />
                   <CartWidget />
                 </div>
-                <form data-id="search-form" className="header-controls-search-form form-inline invisible">
-                  <input className="form-control" placeholder="Поиск" />
-                </form>
+                <SearchWidgetForm 
+                  isVisible={searchVisibility} 
+                  inputVal={searchInputValue}
+                  setInputVal={setSearchInputValue} />
               </div>
             </div>
           </nav>

@@ -56,7 +56,8 @@ export interface IRootReducer {
 }
 
 export interface ICommonReducer {
-  cartCounter: number
+  cartCounter: number,
+  query: string,
 }
 
 export interface ICatalogWidgetReducer {
