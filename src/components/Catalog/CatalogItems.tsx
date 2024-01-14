@@ -106,7 +106,7 @@ export const CatalogItems = ({queryDisable}: {queryDisable: boolean}) => {
       <div className="row">
         {isSuccess && products.map(item => <Card 
           data={item} 
-          className="card catalog-item-card" 
+          className="card catalog-item-card product-card" 
           key={item.id} />
         )}
       </div>

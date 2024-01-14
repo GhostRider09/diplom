@@ -6,13 +6,14 @@ export const Card = ({data: product, className}: TProductProps) => {
   const detailPageUrl = '/catalog/' + product.id;
   
   return (
-    <div className="col-4">
-      <div className={className || "card"}>
-        <img 
-          src={product.images[0]}
-          className="card-img-top img-fluid" 
-          alt={product.title} 
-        />
+    <div className="col-lg-4 col-md-6 col-sm-12 col-products">
+      <div className={className || "card product-card"}>
+        <div className="card-img-wrapper">
+          <img 
+            src={product.images[0]}
+            className="card-img-top img-fluid card-img" 
+            alt={product.title} />
+        </div>
           <div className="card-body">
             <p className="card-text">{product.title}</p>
             <p className="card-text">{formatMoney(product.price)}</p>

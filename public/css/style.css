@@ -100,6 +100,10 @@ section {
   position: relative;
 }
 
+.banner img {
+  background-color: #ececec;
+}
+
 .banner-header {
   position: absolute;
   z-index: 5;
@@ -167,10 +171,41 @@ section {
   min-height: 300px;
 }
 
+.product-card {
+  height: 100%;
+}
+
+.col-products {
+  padding-bottom: 1rem;
+}
+
 /* Catalog */
 .catalog {
   min-height: 600px;
 }
+
+.card-img-wrapper {
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 320px;
+}
+
+.card-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media ( max-width: 767px) {
+  .card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 280px;
+  } 
+} 
 
 .catalog-categories {
   font-size: 1.3rem;
