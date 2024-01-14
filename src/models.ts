@@ -71,3 +71,19 @@ export type TReducerActionProps = {
   type: string,
   payload: any
 }
+
+export interface IOrder {
+  owner: TOrderOwner,
+  items: TOrderPosition[]
+}
+
+export type TOrderOwner = {
+  phone: string,
+  address: string
+}
+
+export type TOrderPosition = {
+  id: number,
+  price: number,
+  count: number
+}
